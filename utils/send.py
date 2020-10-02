@@ -14,12 +14,12 @@ def sendmail(subject, content):
 	message["From"] = sender_email
 	message["To"] = receiver_email
 
-	# Turn these into plain MIMEText objects
-	part1 = MIMEText(content, "plain")
+	# Turn these into html MIMEText objects
+	part2 = MIMEText(content, "html")
 
-	# Add plain-text parts to MIMEMultipart message
+	# Add HTML parts to MIMEMultipart message
 	# The email client will try to render the last part first
-	message.attach(part1)
+	message.attach(part2)
 
 	# Create a secure SSL context
 	context = ssl.create_default_context()

@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from utils import sendmail
 
 
-class RisingStack():
+class RisingStack:
 	ORIGIN = "https://blog.risingstack.com"
 
 	@classmethod
@@ -19,8 +19,12 @@ class RisingStack():
 			link = f'{cls.ORIGIN}{a.get("href")}'
 			section = post.find("section", attrs={ "class": "post-content" })
 			content = f'''
-			{section.get_text()}
-			{link}
+			<html>
+				<body>
+					<p>{section.get_text()}</p>
+					<a href="{link}">{link}</a>
+				</body>
+			</html>
 			'''
 			sendmail(subject, content)
 			time.sleep(3)
