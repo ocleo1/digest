@@ -1,1 +1,1 @@
-from utils.send import sendmail
+from utils.Email import Email

@@ -2,6 +2,7 @@ import tornado.ioloop
 import tornado.web
 
 import blogs
+from utils import Email
 
 TWENTY_MINS_IN_MILLISECONDS = 20 * 60 * 1000
 
@@ -15,7 +16,10 @@ def make_app():
 	])
 
 def digesting():
+	email = Email.get_instance()
+	email.login()
 	blogs.RisingStack.get()
+	email.quit()
 
 if __name__ == "__main__":
 	app = make_app()

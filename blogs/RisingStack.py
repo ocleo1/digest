@@ -2,7 +2,7 @@ import time
 import requests
 
 from bs4 import BeautifulSoup
-from utils import sendmail
+from utils import Email
 
 
 class RisingStack:
@@ -10,6 +10,7 @@ class RisingStack:
 
 	@classmethod
 	def get(cls):
+		email = Email.get_instance()
 		r = requests.get(cls.ORIGIN)
 		soup = BeautifulSoup(r.text, "html.parser")
 		for post in soup.find_all("article"):
@@ -26,5 +27,5 @@ class RisingStack:
 				</body>
 			</html>
 			'''
-			sendmail(subject, content)
-			time.sleep(3)
+			email.send(subject, content)
+			time.sleep(10)
